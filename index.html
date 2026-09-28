@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mebelxona — Handcrafted Furniture Workshop</title>
+  <meta name="description" content="Artisan furniture workshop catalog and interactive studio with custom order configuration and multilingual experience." />
+  <meta property="og:title" content="Mebelxona — Handcrafted Furniture Workshop" />
+  <meta property="og:description" content="Artisan furniture workshop catalog and interactive studio with custom order configuration and multilingual experience." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body data-on="false" class="login-active">
+
+  <a href="#catalog-content" class="skip-to-content" data-i18n="skipToContent">Skip to content</a>
+
+  <!-- ==========================================================================
+       VIEW 1: LOGIN VIEW WITH INTERACTIVE LAMP
+       ========================================================================== -->
+  <main id="login-view" role="main" aria-label="Sign In View">
+    <!-- Top right controls for login screen -->
+    <div class="login-top-bar">
+      <div class="lang-switcher" role="group" aria-label="Language Switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="uz">UZ</button>
+      </div>
+      <button class="theme-toggle-btn" id="login-theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">☀️</span>
+      </button>
+    </div>
+
+    <div class="login-container">
+      <!-- Lamp Wrapper with Pull Cord -->
+      <div class="lamp-wrapper">
+        <svg class="lamp-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Inner Glow -->
+          <ellipse class="inner-glow" cx="100" cy="110" rx="65" ry="32" />
+
+          <!-- Lamp Neck / Stem -->
+          <rect class="lamp-base" x="92" y="100" width="16" height="160" rx="8" />
+
+          <!-- Lamp Base Plate -->
+          <rect class="lamp-base" x="60" y="250" width="80" height="12" rx="6" />
+
+          <!-- Pull Cord System -->
+          <g class="pull-cord">
+            <line class="cord-line" x1="130" y1="110" x2="130" y2="180" />
+            <circle class="cord-bead" cx="130" cy="190" r="6" />
+            <circle class="cord-hit" cx="130" cy="190" r="28" fill="transparent" />
+          </g>
+
+          <!-- Lamp Shade Dome -->
+          <path class="lamp-shade" d="M30 110 C 30 50, 170 50, 170 110 C 170 125, 30 125, 30 110 Z" />
+        </svg>
+
+        <div class="lamp-hint" id="lamp-hint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+          <span data-i18n="lampPullHint">Pull cord to turn on</span>
+        </div>
+      </div>
+
+      <!-- Glassmorphic Login Form Box -->
+      <div class="login-form-box" id="login-form-box">
+        <div class="login-brand-badge">
+          <span>🪵</span>
+          <span>Mebelxona Workshop</span>
+        </div>
+
+        <h2 data-i18n="loginTitle">Welcome Back</h2>
+        <p class="login-subtext" data-i18n="loginSubtitle">Enter any demo credentials to access our furniture catalog.</p>
+
+        <form id="login-form" novalidate onsubmit="return false;">
+          <div class="form-field">
+            <label for="login-username" data-i18n="usernameLabel">Username</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <input type="text" id="login-username" placeholder="e.g. Alisher" autocomplete="username" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="login-password" data-i18n="passwordLabel">Password</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
+            </div>
+          </div>
+
+          <div class="login-error-msg" id="login-error-msg" role="alert"></div>
+
+          <button type="submit" class="login-submit-btn" id="login-submit-btn">
+            <span data-i18n="signInBtn">Sign In to Workshop</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <p class="login-demo-note" data-i18n="demoNote">Demo Mode: Type any name and password to enter.</p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       VIEW 2: CATALOG VIEW (Main Furniture Storefront SPA)
+       ========================================================================== -->
+  <div id="catalog-view" class="hidden">
+    <!-- Top Navigation Bar (3-Zone Contract) -->
+    <header class="top-nav" role="banner">
+      <div class="top-nav-inner">
+        <!-- Zone 1: Brand Wordmark -->
+        <a href="#" class="brand-zone" id="brand-link" aria-label="Mebelxona Home">
+          <div class="brand-icon">M</div>
+          <span class="brand-title">Mebel<span>xona</span></span>
+        </a>
+
+        <!-- Zone 2: Navigation Links -->
+        <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+          <a href="#catalog-section" class="nav-link active" data-i18n="navCatalog">Catalog</a>
+          <a href="#sets-section" class="nav-link" data-i18n="navSets">Room Sets</a>
+          <a href="#process-section" class="nav-link" data-i18n="navProcess">Craft Process</a>
+          <a href="#why-us-section" class="nav-link" data-i18n="navWhyUs">Why Us</a>
+          <a href="#reviews-section" class="nav-link" data-i18n="navReviews">Reviews</a>
+          <a href="#faq-section" class="nav-link" data-i18n="navFaq">FAQ</a>
+        </nav>
+
+        <!-- Zone 3: Primary Actions -->
+        <div class="nav-actions">
+          <div class="user-greeting" id="nav-user-greeting">
+            <span id="nav-greeting-text">Hello,</span>
+            <span id="nav-user-name">Guest</span>
+          </div>
+
+          <button class="nav-btn-icon" id="nav-fav-toggle-btn" aria-label="View Favorites" title="Favorites">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="fav-counter-badge" id="fav-counter-badge">0</span>
+          </button>
+
+          <div class="lang-switcher" id="nav-lang-switcher" role="group" aria-label="Language Selector">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="uz">UZ</button>
+          </div>
+
+          <button class="theme-toggle-btn" id="nav-theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">☀️</span>
+          </button>
+
+          <button class="logout-btn" id="logout-btn" aria-label="Logout" data-i18n="logoutBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="catalog-content">
+      <!-- Hero Section -->
+      <section class="hero-section" aria-label="Workshop Introduction">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-badge-tag" data-i18n="heroBadge">Custom Artisan Woodwork</span>
+            <h1 class="hero-title">
+              <span data-i18n="heroTitlePart1">Tailor-Made Furniture</span><br>
+              <span class="highlight-gold" data-i18n="heroTitlePart2">For Soul & Space</span>
+            </h1>
+            <p class="hero-desc" data-i18n="heroDesc">
+              From solid oak dining tables to bespoke bedroom sanctuaries. Handcrafted with generational timber traditions, non-toxic organic oils, and exact millimeter precision.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#catalog-section" class="hero-primary-btn">
+                <span data-i18n="heroCtaCatalog">Explore Collection</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <button class="hero-secondary-btn" id="hero-custom-quote-btn" data-i18n="heroCtaCustom">
+                Request 3D Consultation
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Visual Feature Box -->
+          <div class="hero-visual-card">
+            <div class="hero-svg-preview" id="hero-showcase-svg">
+              <!-- Animated SVG illustration of furniture inserted via JS -->
+            </div>
+            <div class="hero-visual-caption">
+              <div>
+                <strong data-i18n="heroShowcaseName">Nordic Oak Masterpiece</strong>
+                <p style="font-size:0.75rem;" data-i18n="heroShowcaseSub">Selected 100-year old solid wood</p>
+              </div>
+              <span class="tabular-nums" style="color:var(--accent-gold); font-weight:700;">$1,120</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animated Counters Strip -->
+        <div class="stats-strip" role="region" aria-label="Key Achievements">
+          <div class="stat-item">
+            <span class="stat-number tabular-nums" data-target="1200" id="stat-projects">0</span>
+            <span class="stat-label" data-i18n="statProjects">Completed Projects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number tabular-nums" data-target="15" id="stat-years">0</span>
+            <span class="stat-label" data-i18n="statYears">Years of Heritage</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number tabular-nums" data-target="42" id="stat-masters">0</span>
+            <span class="stat-label" data-i18n="statMasters">Master Craftsmen</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number tabular-nums" data-target="5" id="stat-warranty">0</span>
+            <span class="stat-label" data-i18n="statWarranty">Years Comprehensive Warranty</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CATALOG SECTION (Filter Chips, Search, Sort, 66+ Items Grid)
+           ====================================================================== -->
+      <section class="catalog-section" id="catalog-section" aria-label="Furniture Catalog">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="catalogTag">Handcrafted Portfolio</span>
+          <h2 class="section-title" data-i18n="catalogTitle">Explore Furniture Collection</h2>
+          <p class="section-subtext" data-i18n="catalogSubtitle">Filter by room, material, price range, or discover our customer bestsellers.</p>
+        </div>
+
+        <!-- Master Filter & Search Bar -->
+        <div class="controls-bar">
+          <div class="search-and-toggles">
+            <!-- Live Search -->
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="catalog-search-input" placeholder="Search by name, wood, style..." aria-label="Search furniture" />
+              <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search">✕</button>
+            </div>
+
+            <!-- Secondary Filters Toolbar -->
+            <div class="filter-dropdowns">
+              <!-- Sort Dropdown -->
+              <div class="select-wrapper">
+                <select id="sort-select" aria-label="Sort products">
+                  <option value="default" data-i18n="sortFeatured">Sort: Featured</option>
+                  <option value="price-asc" data-i18n="sortPriceAsc">Price: Low to High</option>
+                  <option value="price-desc" data-i18n="sortPriceDesc">Price: High to Low</option>
+                  <option value="newest" data-i18n="sortNewest">Newest Arrivals</option>
+                  <option value="bestseller" data-i18n="sortBestseller">Bestsellers</option>
+                </select>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+
+              <!-- Material Filter -->
+              <div class="select-wrapper">
+                <select id="material-select" aria-label="Filter by material">
+                  <option value="all" data-i18n="materialAll">All Materials</option>
+                  <option value="oak" data-i18n="materialOak">Solid Oak</option>
+                  <option value="walnut" data-i18n="materialWalnut">Black Walnut</option>
+                  <option value="pine" data-i18n="materialPine">Nordic Pine</option>
+                  <option value="leather" data-i18n="materialLeather">Italian Leather</option>
+                  <option value="velvet" data-i18n="materialVelvet">Bouclé & Velvet</option>
+                  <option value="mdf" data-i18n="materialMdf">MDF & Natural Veneer</option>
+                  <option value="metal" data-i18n="materialMetal">Forged Metal & Brass</option>
+                </select>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+
+              <!-- Price Range Slider -->
+              <div class="price-slider-group">
+                <label for="price-range-slider" data-i18n="priceFilterLabel">Max Price:</label>
+                <input type="range" id="price-range-slider" min="100" max="3500" step="50" value="3500" />
+                <span class="price-value-tag tabular-nums" id="price-range-display">$3,500</span>
+              </div>
+
+              <!-- Favorites Filter Toggle -->
+              <button class="filter-chip-fav" id="filter-fav-btn">
+                <span>❤️</span>
+                <span data-i18n="filterFavorites">Favorites Only</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Category Filter Tabs with Item Counts -->
+          <div class="category-tabs-wrapper">
+            <div class="category-tabs" id="category-tabs" role="tablist" aria-label="Furniture Categories">
+              <!-- Dynamically rendered tabs with exact counts -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Catalog Status Bar -->
+        <div class="catalog-status-bar">
+          <span id="catalog-count-indicator">Showing 12 of 66 items</span>
+          <button class="reset-filters-btn" id="reset-filters-btn" data-i18n="resetFilters">Reset Filters ✕</button>
+        </div>
+
+        <!-- Products Responsive Grid -->
+        <div class="product-grid" id="product-grid" role="region" aria-live="polite">
+          <!-- Rendered dynamically via app.js -->
+        </div>
+
+        <!-- Empty State (when search/filters match 0) -->
+        <div class="no-results-box" id="no-results-box" style="display:none;">
+          <div class="no-results-icon">🔍</div>
+          <h3 data-i18n="noResultsTitle">No matching furniture found</h3>
+          <p data-i18n="noResultsDesc">Try clearing some filters or searching with a different term.</p>
+          <button class="hero-primary-btn" id="no-results-reset-btn" data-i18n="resetFilters">Reset All Filters</button>
+        </div>
+
+        <!-- Show More Action Button -->
+        <div class="catalog-actions-center" id="catalog-load-more-box">
+          <button class="show-more-btn" id="show-more-btn">
+            <span data-i18n="showMoreBtn">Show More Furniture</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           READY ROOM SETS SECTION (6 Curated Interior Bundles)
+           ====================================================================== -->
+      <section class="sets-section" id="sets-section" aria-label="Ready Interior Sets">
+        <div class="sets-inner">
+          <div class="section-header">
+            <span class="section-tag" data-i18n="setsTag">Harmonious Interiors</span>
+            <h2 class="section-title" data-i18n="setsTitle">Ready-to-Order Room Sets</h2>
+            <p class="section-subtext" data-i18n="setsSubtitle">Complete matched ensembles designed by our architects. Save up to 20% on curated bundles.</p>
+          </div>
+
+          <div class="sets-grid" id="sets-grid">
+            <!-- 6 sets populated by app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           OUR PROCESS (Animated 5 Steps)
+           ====================================================================== -->
+      <section class="process-section" id="process-section" aria-label="Crafting Process">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="processTag">The Workshop Way</span>
+          <h2 class="section-title" data-i18n="processTitle">From Raw Timber to Your Living Room</h2>
+          <p class="section-subtext" data-i18n="processSubtitle">Every piece undergoes 5 rigorous artisanal stages to ensure lifelong endurance.</p>
+        </div>
+
+        <div class="process-steps-grid">
+          <div class="process-step-card">
+            <div class="step-num-badge">01</div>
+            <h3 class="step-title" data-i18n="step1Title">3D Consultation</h3>
+            <p class="step-desc" data-i18n="step1Desc">We measure your space, discuss functional needs, and build a photorealistic 3D model with material samples.</p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="step-num-badge">02</div>
+            <h3 class="step-title" data-i18n="step2Title">Timber Selection</h3>
+            <p class="step-desc" data-i18n="step2Desc">Selecting properly dried solid beech, oak, or walnut with unique grain character and moisture grade &lt;8%.</p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="step-num-badge">03</div>
+            <h3 class="step-title" data-i18n="step3Title">Precision Joinery</h3>
+            <p class="step-desc" data-i18n="step3Desc">Mortise-and-tenon joints, dovetail drawer corners, and whisper-quiet Austrian concealed hardware.</p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="step-num-badge">04</div>
+            <h3 class="step-title" data-i18n="step4Title">Organic Finishing</h3>
+            <p class="step-desc" data-i18n="step4Desc">Triple-layer hardwax oil and natural beeswax hand-buffed to preserve tactile warmth and liquid resistance.</p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="step-num-badge">05</div>
+            <h3 class="step-title" data-i18n="step5Title">White-Glove Delivery</h3>
+            <p class="step-desc" data-i18n="step5Desc">Assembled in your room by our master carpenters, leveled precisely, cleaned, and signed off under warranty.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           WHY US (4 Features)
+           ====================================================================== -->
+      <section class="why-us-section" id="why-us-section" aria-label="Why Choose Our Workshop">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="whyUsTag">Our Guarantee</span>
+          <h2 class="section-title" data-i18n="whyUsTitle">Why Discerning Clients Choose Us</h2>
+          <p class="section-subtext" data-i18n="whyUsSubtitle">True craftsmanship means zero compromises on internal structural integrity.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">🌲</div>
+            <h3 class="feature-title" data-i18n="feature1Title">100% Solid Certified Wood</h3>
+            <p class="feature-desc" data-i18n="feature1Desc">No cheap toxic particle boards. We use sustainably sourced oak, walnut, ash, and moisture-sealed birch plywood.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">📐</div>
+            <h3 class="feature-title" data-i18n="feature2Title">Free 3D Spatial Project</h3>
+            <p class="feature-desc" data-i18n="feature2Desc">Receive full architectural 3D visualizations with color palettes and exact measurements before production begins.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🛠️</div>
+            <h3 class="feature-title" data-i18n="feature3Title">15 Years Heritage</h3>
+            <p class="feature-desc" data-i18n="feature3Desc">Our workshop unites 42 generational joiners with over a decade of prestigious private residential commissions.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🛡️</div>
+            <h3 class="feature-title" data-i18n="feature4Title">5-Year Full Warranty</h3>
+            <p class="feature-desc" data-i18n="feature4Desc">Official written contract warranty covering wood stability, structural joinery, hinges, and guide mechanisms.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CUSTOMER REVIEWS SLIDER
+           ====================================================================== -->
+      <section class="reviews-section" id="reviews-section" aria-label="Customer Reviews">
+        <div class="reviews-inner">
+          <div class="section-header" style="text-align:center; align-items:center;">
+            <span class="section-tag" data-i18n="reviewsTag">Client Words</span>
+            <h2 class="section-title" data-i18n="reviewsTitle">Trusted Across 1,200+ Homes</h2>
+            <p class="section-subtext" data-i18n="reviewsSubtitle">Read real experiences from families and interior designers who furnished with us.</p>
+          </div>
+
+          <div class="reviews-slider-box" id="reviews-slider-box">
+            <div class="review-card-content" id="review-card-content">
+              <!-- Dynamically populated review content -->
+            </div>
+
+            <div class="review-author-row">
+              <div class="author-meta">
+                <div class="author-avatar" id="review-author-avatar">A</div>
+                <div>
+                  <div class="author-name" id="review-author-name">Aziz Karimov</div>
+                  <div class="author-city" id="review-author-city">Tashkent · Living Room Set</div>
+                </div>
+              </div>
+
+              <div class="review-slider-controls">
+                <button class="slider-nav-btn" id="review-prev-btn" aria-label="Previous review">←</button>
+                <button class="slider-nav-btn" id="review-next-btn" aria-label="Next review">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-dots" id="review-slider-dots">
+            <!-- 6 dots rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           FAQ ACCORDION
+           ====================================================================== -->
+      <section class="faq-section" id="faq-section" aria-label="Frequently Asked Questions">
+        <div class="section-header" style="text-align:center; align-items:center;">
+          <span class="section-tag" data-i18n="faqTag">Have Questions?</span>
+          <h2 class="section-title" data-i18n="faqTitle">Frequently Asked Questions</h2>
+          <p class="section-subtext" data-i18n="faqSubtitle">Everything you need to know about custom sizing, materials, timelines, and payment.</p>
+        </div>
+
+        <div class="faq-list" id="faq-list">
+          <!-- 6 FAQ items populated dynamically by app.js -->
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================================================================
+         SITE FOOTER
+         ====================================================================== -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="brand-zone" style="margin-bottom:0.5rem;">
+            <div class="brand-icon">M</div>
+            <span class="brand-title">Mebel<span>xona</span></span>
+          </div>
+          <p style="font-size:0.875rem;" data-i18n="footerAbout">
+            Generational bespoke furniture workshop crafting lifelong solid timber, natural veneer, and architectural interior elements since 2011.
+          </p>
+          <div class="footer-social-row">
+            <a href="#" class="footer-social-btn" aria-label="Instagram">IG</a>
+            <a href="#" class="footer-social-btn" aria-label="Telegram">TG</a>
+            <a href="#" class="footer-social-btn" aria-label="Facebook">FB</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerNavTitle">Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#catalog-section" data-i18n="navCatalog">Catalog</a></li>
+            <li><a href="#sets-section" data-i18n="navSets">Room Sets</a></li>
+            <li><a href="#process-section" data-i18n="navProcess">Craft Process</a></li>
+            <li><a href="#why-us-section" data-i18n="navWhyUs">Why Us</a></li>
+            <li><a href="#reviews-section" data-i18n="navReviews">Reviews</a></li>
+            <li><a href="#faq-section" data-i18n="navFaq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerCategoriesTitle">Popular Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#catalog-section" class="footer-cat-link" data-cat="sofas" data-i18n="catSofas">Sofas</a></li>
+            <li><a href="#catalog-section" class="footer-cat-link" data-cat="beds" data-i18n="catBeds">Beds</a></li>
+            <li><a href="#catalog-section" class="footer-cat-link" data-cat="tables" data-i18n="catTables">Tables</a></li>
+            <li><a href="#catalog-section" class="footer-cat-link" data-cat="kitchen" data-i18n="catKitchen">Kitchen</a></li>
+            <li><a href="#catalog-section" class="footer-cat-link" data-cat="office" data-i18n="catOffice">Office</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footerContactTitle">Showroom & Workshop</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span data-i18n="footerAddress">Chilonzor district, Bunyodkor Ave 42, Tashkent</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>+998 (71) 200-40-50</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span data-i18n="footerHours">Mon - Sat: 09:00 - 20:00 (Sunday by appointment)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Mebelxona Furniture Workshop. All rights reserved.</p>
+        <p data-i18n="footerCraftedWith">Handcrafted with passion & natural timber</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================================
+       MODALS: Product Details (with dynamic SVG recoloring), Quote & Sets
+       ========================================================================== -->
+  <!-- 1. Product Detail Modal -->
+  <div class="modal-backdrop" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-product-title">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="modal-product-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="product-modal-grid">
+        <!-- Left: Interactive Vector Stage + Swatches -->
+        <div class="modal-preview-col">
+          <div class="modal-svg-stage" id="modal-svg-stage">
+            <!-- Dynamic SVG illustration -->
+          </div>
+
+          <div class="modal-swatches-box">
+            <span class="swatches-label" data-i18n="colorSelectorLabel">Finish & Fabric Options:</span>
+            <div class="swatches-row" id="modal-swatches-row">
+              <!-- Swatches generated dynamically; clicking recolors SVG -->
+            </div>
+            <span id="modal-swatch-name" style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Natural Oak</span>
+          </div>
+        </div>
+
+        <!-- Right: Specifications & Quote Action -->
+        <div class="modal-details-col">
+          <span class="modal-category-tag" id="modal-product-category">Sofas</span>
+          <h3 class="modal-product-title" id="modal-product-title">Nordic Minimalist Sofa</h3>
+          <div class="modal-price-tag tabular-nums" id="modal-product-price">$890</div>
+
+          <p class="modal-desc" id="modal-product-desc">
+            Handcrafted with a kiln-dried beech frame and high-resilience foam wrapped in natural linen.
+          </p>
+
+          <div class="specs-table">
+            <div class="spec-cell">
+              <span class="spec-key" data-i18n="specMaterial">Primary Material</span>
+              <span class="spec-val" id="modal-spec-material">Solid Oak</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-key" data-i18n="specDimensions">Dimensions</span>
+              <span class="spec-val tabular-nums" id="modal-spec-dimensions">220 × 95 × 85 cm</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-key" data-i18n="specProduction">Production Time</span>
+              <span class="spec-val" id="modal-spec-production">10-14 days</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-key" data-i18n="specWarranty">Warranty</span>
+              <span class="spec-val" id="modal-spec-warranty">5 Years Full</span>
+            </div>
+          </div>
+
+          <div class="modal-actions-row">
+            <button class="modal-order-btn" id="modal-open-quote-btn">
+              <span data-i18n="orderQuoteBtn">Order / Request Quote</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Items Carousel ("You May Also Like") -->
+      <div class="related-section">
+        <h4 data-i18n="relatedProductsTitle">You May Also Like</h4>
+        <div class="related-grid" id="modal-related-grid">
+          <!-- 4 related items rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Demo Quote Request Modal -->
+  <div class="modal-backdrop" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+    <div class="modal-dialog" style="max-width: 500px;">
+      <button class="modal-close-btn" id="modal-quote-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="quote-modal-box">
+        <div id="quote-form-container">
+          <h3 id="quote-modal-title" data-i18n="quoteModalTitle">Request Custom Quote</h3>
+          <p class="quote-subtext" id="quote-modal-subtitle" data-i18n="quoteModalSubtitle">
+            Our master will calculate exact costs and prepare your 3D mockup.
+          </p>
+
+          <form class="quote-form" id="quote-form" onsubmit="return false;">
+            <div class="form-field">
+              <label for="quote-name" data-i18n="quoteNameLabel">Your Name</label>
+              <div class="input-wrapper">
+                <input type="text" id="quote-name" placeholder="Alisher" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="quote-phone" data-i18n="quotePhoneLabel">Phone Number</label>
+              <div class="input-wrapper">
+                <input type="tel" id="quote-phone" placeholder="+998 90 123 45 67" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="quote-comment" data-i18n="quoteCommentLabel">Custom Notes / Dimensions (Optional)</label>
+              <textarea id="quote-comment" placeholder="e.g. Need oak in walnut tint, custom width 240cm"></textarea>
+            </div>
+
+            <button type="submit" class="login-submit-btn" style="margin-top:0.5rem;" id="quote-submit-btn">
+              <span data-i18n="quoteSendBtn">Send Request</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Success Message on Submission -->
+        <div class="quote-success-state" id="quote-success-state">
+          <div class="quote-success-icon">✓</div>
+          <h3 data-i18n="quoteSuccessTitle">Thank You!</h3>
+          <p data-i18n="quoteSuccessMsg">
+            Your request has been received. Our chief master will contact you within 15 minutes to discuss the details.
+          </p>
+          <button class="hero-primary-btn" id="quote-success-close-btn" data-i18n="quoteSuccessClose">
+            Back to Catalog
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Room Set Breakdown Modal -->
+  <div class="modal-backdrop" id="set-modal" role="dialog" aria-modal="true" aria-labelledby="set-modal-title">
+    <div class="modal-dialog" style="max-width: 680px;">
+      <button class="modal-close-btn" id="modal-set-close-btn" aria-label="Close modal">✕</button>
+      <div style="padding: 2.5rem 2rem;">
+        <span class="modal-category-tag" data-i18n="setModalTag">Ready Room Ensemble</span>
+        <h3 style="font-size:1.75rem; margin:0.4rem 0 1rem;" id="set-modal-title">Living Room Set</h3>
+        <p style="color:var(--text-secondary); margin-bottom:1.5rem;" id="set-modal-desc"></p>
+
+        <h4 style="font-size:1rem; margin-bottom:0.75rem;" data-i18n="setIncludedTitle">Included in this Set:</h4>
+        <div id="set-modal-items-list" style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.75rem;">
+          <!-- Dynamically inserted item rows -->
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; padding-top:1.25rem; border-top:1px solid var(--border-subtle); flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="font-size:0.85rem; color:var(--text-muted); text-decoration:line-through;" id="set-modal-old-price">$2,450</div>
+            <div style="font-size:1.75rem; font-weight:700; color:var(--accent-gold);" class="tabular-nums" id="set-modal-bundle-price">$2,080</div>
+          </div>
+          <button class="hero-primary-btn" id="set-modal-order-btn">
+            <span data-i18n="orderSetBtn">Order This Complete Set</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GSAP CDN Scripts -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/Draggable.min.js"></script>
+  <!-- Data & Modular Components -->
+  <script src="i18n-data.js"></script>
+  <script src="svg-generator.js"></script>
+  <script src="products-data.js"></script>
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Mebelxona - Custom Furniture Workshop",
+  "description": "Handcrafted custom furniture workshop catalog with interactive lamp login, multilingual support (EN/RU/UZ), real-time SVG color customizer, and room sets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
